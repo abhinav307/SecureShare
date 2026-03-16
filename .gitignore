@@ -1,0 +1,26 @@
+# Environment secrets
+.env
+
+# Database
+storage/database.sqlite
+
+# Uploaded files
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Storage files
+storage/avatars/*
+storage/covers/*
+storage/files/*
+!storage/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

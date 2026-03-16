@@ -1,0 +1,30 @@
+# Route all errors through index.php (works WITHOUT mod_rewrite!)
+ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # If the file exists, serve it directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Static assets from public/
+    RewriteRule ^(css|js|uploads)(/.*)?$ public/$1$2 [L]
+
+    # Everything else goes through index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Block sensitive files
+<Files ".env">
+    Order deny,allow
+    Deny from all
+</Files>
+<Files ".gitignore">
+    Order deny,allow
+    Deny from all
+</Files>
